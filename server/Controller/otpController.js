@@ -1,28 +1,53 @@
 
-// const asyncHandler = require("express-async-handler")
-// const User = require('../models/userModel');
+ const asyncHandler = require("express-async-handler")
+ const otpGenerator = require("otp-generator");
+ const User = require("../Model/userModel");
+ const OTP = require("../Model/OTP");
+const sendOtp = asyncHandler(async (req, res) => {
+	try {
+		const { email } = req.body;
 
+		// Check if user is already present
+		// Find user with provided email
+		const checkUserPresent = await User.findOne({ email });
+		// to be used in case of signup
 
+		// If user found with provided email
+		if (checkUserPresent) {
+			// Return 401 Unauthorized status code with error message
+			return res.status(401).json({
+				success: false,
+				message: `User is Already Registered`,
+			});
+		}
 
-// const sendOtpToUser = async (req, res) => {
-//     try {
-//         const { email } = req.body;
+		var otp = otpGenerator.generate(6, {
+			upperCaseAlphabets: false,
+			lowerCaseAlphabets: false,
+			specialChars: false,
+		});
+		const result = await OTP.findOne({ otp: otp });
+		console.log("Result is Generate OTP Func");
+		console.log("OTP", otp);
+		console.log("Result", result);
+		while (result) {
+			otp = otpGenerator.generate(6, {
+				upperCaseAlphabets: false,
+			});
+		}
+		const otpPayload = { email, otp };
+		const otpBody = await OTP.create(otpPayload);
+		console.log("OTP Body", otpBody);
 
-//         // Check if the user exists
-//         const user = await User.findOne({ email });
+		res.status(200).json({
+			success: true,
+			message: `OTP Sent Successfully`,
+			otp,
+		});
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ success: false, error: error.message });
+	}
+})
 
-//         if (user) {
-//             // User exists, return an error response
-//             res.status(400).json({ message: "User already exists with this email." });
-//         } else {
-//             // User does not exist, call the OTP send function
-//             await sendOtp(email); // Assumes sendOtp function is defined elsewhere to handle OTP sending
-//             res.status(200).json({ message: "OTP sent to the provided email." });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: "An error occurred", error: error.message });
-//     }
-// };
-
-
-// module.exports = {sendOtpToUser};
+ module.exports = {sendOtp};
