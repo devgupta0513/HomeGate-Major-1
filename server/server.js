@@ -33,7 +33,7 @@ app.use(errorHandler)
 connectDB()
     .then(() => {
         console.log('Connected to DB');
-        const PORT = 4000;
+        const PORT = process.env.PORT;
         app.listen(PORT, () => {
             console.log(`Listening on port ${PORT}`)
         })

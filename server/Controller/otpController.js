@@ -50,4 +50,48 @@ const sendOtp = asyncHandler(async (req, res) => {
 	}
 })
 
- module.exports = {sendOtp};
+const verifyOtp = asyncHandler(async (req, res) => {
+    // Find the most recent OTP for the email
+    try {
+    const {  email,otp,} = req.body;
+    if (!email  ) {
+        return res.status(403).send({
+            success: false,
+            message: "Please Enter the email",
+        });
+    }
+    if ( !otp ) {
+        return res.status(403).send({
+            success: false,
+            message: "Please Enter the otp",
+        });
+    }
+		const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+		console.log(response);
+		if (response.length === 0) {
+			// OTP not found for the email
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not valid",
+                
+                
+			});
+		} else if (otp !== response[0].otp) {
+			// Invalid OTP
+			return res.status(400).json({
+				success: false,
+				message: "The OTP is not  valid",
+			});
+		}
+        res.status(200).json({
+			success: true,
+			message: `OTP Verified Successfully`,
+		});
+	} catch (error) {
+		console.log(error.message);
+		return res.status(500).json({ success: false, error: error.message });
+	}
+
+})
+
+ module.exports = {sendOtp,verifyOtp};
