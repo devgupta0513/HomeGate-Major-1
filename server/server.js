@@ -28,8 +28,19 @@ app.use('/api/user',userRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-
-
+app.get("/", (req, res) => {
+    res.status(200).json({
+      message: "Welcome to the HomeGate Backend " ,
+    });
+  });
+  
+  app.use(
+    cors({
+      origin: JSON.parse(process.env.CORS_ORIGIN),
+      credentials: true,
+      maxAge: 14400,
+    })
+  );
 connectDB()
     .then(() => {
         console.log('Connected to DB');
