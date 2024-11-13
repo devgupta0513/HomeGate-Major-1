@@ -6,6 +6,9 @@ import axios from 'axios'
 const SignUp = () => {
     const [name, setName] = useState()
     const [email, setEmail] = useState()
+    const [otpe, setOtpe] = useState("")
+    
+    const [showButton, setShowButton] = useState(true);
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [pic, setPic] = useState()
@@ -15,6 +18,92 @@ const SignUp = () => {
     const handleClick = () => setShow(!show)
     const toast = useToast()
     const navigate = useNavigate()
+    const otpHandle  = async() => {
+        // setLoading(true);
+        setShowButton(false)
+        try {
+            // const config = {
+            //     headers: {
+            //         "Content-type": "application/json",
+            //     },
+            // };
+
+            // const { otp } = await axios.post(
+            //     "https://linkus-lw9r.onrender.com/api/user/login",
+            //     { email},
+            //     config
+            // );
+                
+            toast({
+                title: "OTP SEND SUCCESSFULLY",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
+            
+            // console.log(otp);
+            
+        } catch (error) {
+            toast({
+                title: "Error Occured!",
+                description: error.response.data.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            // setLoading(false);
+        }
+
+
+
+    }
+
+
+
+    const otpSubmitHandle  = async() => {
+        // setLoading(true);
+        setShowButton(true);
+        setOtpe('');
+        try {
+            // const config = {
+            //     headers: {
+            //         "Content-type": "application/json",
+            //     },
+            // };
+
+            // const { otp } = await axios.post(
+            //     "https://linkus-lw9r.onrender.com/api/user/login",
+            //     { email},
+            //     config
+            // );
+                
+            toast({
+                title: "OTP VERIFIED  SUCCESSFULLY",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
+            
+            // console.log(otp);
+            
+        } catch (error) {
+            toast({
+                title: "Error Occured!",
+                description: error.response.data.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            // setLoading(false);
+        }
+
+    }
+
+
 
     const postDetails = (pics) => {
         setLoading(true)
@@ -48,10 +137,10 @@ const SignUp = () => {
         } else {
             toast({
                 title: "Please Select a Valid Image!",
-                status: "warning",
+                status: "",
                 duration: 5000,
                 isClosable: true,
-                position: "bottom",
+                position: "top",
             })
             setLoading(false)
             return
@@ -129,10 +218,52 @@ const SignUp = () => {
 
             <FormControl id="email1" isRequired>
                 <FormLabel>Email</FormLabel>
+                <InputGroup>
                 <Input
                     placeholder="Enter your Email"
                     onChange={(e) => setEmail(e.target.value)}
+                    
                 />
+                 <InputRightElement width="5.6rem" >
+                 {showButton && (
+    <Button 
+colorScheme="blue"
+        h="1.75rem" 
+        size="sm" 
+        onClick={otpHandle} 
+        
+        display={showButton ? 'block' : 'none'}
+    >
+        GET OTP
+    </Button>
+)}
+                    </InputRightElement>
+                </InputGroup>
+            </FormControl>
+            <FormControl id="otp1" isRequired>
+                <FormLabel>OTP</FormLabel>
+                <InputGroup>
+                <Input
+                    placeholder="Enter your otp"
+                    onChange={(e) => setOtpe(e.target.value)}
+                    value={otpe}
+                />
+                 <InputRightElement width="6.3rem">
+                 {!showButton && (
+    <Button 
+    colorScheme="green"
+        marginRight="6px" 
+        h="1.75rem" 
+        size="sm" 
+        onClick={otpSubmitHandle} 
+        
+        display={showButton ? 'none' : 'block'}
+    >
+        VERIFY OTP
+    </Button>
+)}
+                    </InputRightElement>
+                </InputGroup>
             </FormControl>
 
             <FormControl id="password1" isRequired>

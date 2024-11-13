@@ -3,7 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const petRouter = require('./Routes/PetRoute')
 const AdoptFormRoute = require('./Routes/AdoptFormRoute')
-const AdminRoute = require('./Routes/AdminRoute')
+const userRoutes = require('./Routes/userRoutes');
+const AdminRoute = require('./Routes/AdminRoute');
+const { notFound, errorHandler } = require("./middlewares/errrorMIddleware");
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./db');
@@ -21,6 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(petRouter)
 app.use('/form', AdoptFormRoute)
 app.use('/admin', AdminRoute)
+app.use('/api/user',userRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
+
 
 
 connectDB()
