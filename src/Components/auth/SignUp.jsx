@@ -23,17 +23,20 @@ const SignUp = () => {
         // setLoading(true);
         setShowGetOtp(false)
         try {
-            // const config = {
-            //     headers: {
-            //         "Content-type": "application/json",
-            //     },
-            // };
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
 
-            // const { otp } = await axios.post(
-            //     "https://linkus-lw9r.onrender.com/api/user/login",
-            //     { email},
-            //     config
-            // );
+            const hello = await axios.post(
+                "http://localhost:4000/api/user/sendotp",
+                { email},
+                config
+            );
+            console.log(hello);
+            
+
                 
             toast({
                 title: "OTP SEND SUCCESSFULLY",

@@ -42,15 +42,21 @@ app.use('/api/user',userRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
+// app.use(
+//     cors({
+//       origin: JSON.parse(process.env.CORS_ORIGIN),
+//       credentials: true,
+//       maxAge: 14400,
+//     })
+//   );
+
 app.use(
     cors({
-      origin: JSON.parse(process.env.CORS_ORIGIN),
+  origin: JSON.parse('["http://localhost:3000", "https://devgupta0513.github.io"]'),
       credentials: true,
       maxAge: 14400,
-    })
-  );
-
-
+    })
+  );
 
 
 const PORT = process.env.PORT || 4000;
