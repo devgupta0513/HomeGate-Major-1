@@ -33,18 +33,31 @@ const SignUp = () => {
     }, [ShowGetOtp]);
 
     const otpHandle = async () => {
-        if (!email ) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+        if (!email) {
             toast({
-                title: "Please fill  the email",
+                title: "Please enter  the gmail",
                 status: "warning",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
             });
-            
+            setLoading(false);
             return;
         }
-        
+        if (!emailRegex.test(email)) {
+            toast({
+                title: "Please enter a valid email address",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            setLoading(false);
+            return;
+        }
+
         setShowGetOtp(false); // Hide the button immediately after click
         try {
             const config = {
@@ -53,14 +66,14 @@ const SignUp = () => {
                 },
             };
 
-            const  {data}  = await axios.post(
+            const { data } = await axios.post(
                 "http://localhost:4000/api/user/sendotp",
-                {email},
+                { email },
                 config
             );
             setOtpBackend(data.otp);
             console.log(data.otp);
-            
+
             toast({
                 title: "OTP SEND SUCCESSFULLY",
                 status: "success",
@@ -81,12 +94,10 @@ const SignUp = () => {
         }
     };
 
-    const otpSubmitHandle  = async() => {
+    const otpSubmitHandle = async () => {
         // setLoading(true);
-       
-         
         // setShowGetOtp(true);
-        if (!otpe ) {
+        if (!otpe) {
             toast({
                 title: "Please fill  the otp",
                 status: "warning",
@@ -94,44 +105,43 @@ const SignUp = () => {
                 isClosable: true,
                 position: "bottom",
             });
-            
+
             return;
         }
-         if (otpe.search(/[0-9]+/) === -1) {
-           
+        if (otpe.search(/[0-9]+/) === -1) {
+
             toast({
-                title:"You have entered a characters instead of a valid OTP",
+                title: "You have entered a characters instead of a valid OTP",
                 status: "warning",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
             });
-            return ;
-          }
-          if (otpe.length !== 6)
-            {
-           
-                toast({
-                    title:"OTP MUST BE OF 6 DIGIT",
-                    status: "warning",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom",
-                });
-                return ;
-              }
-        
-        
+            return;
+        }
+        if (otpe.length !== 6) {
+
+            toast({
+                title: "OTP MUST BE OF 6 DIGIT",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return;
+        }
+
+
         try {
-            if(otpe !== OtpBackend){
+            if (otpe !== OtpBackend) {
                 toast({
-                    title:"OTP IS IN VALID",
+                    title: "OTP IS IN VALID",
                     status: "warning",
                     duration: 5000,
                     isClosable: true,
                     position: "bottom",
                 });
-                return ;
+                return;
 
             }
             const config = {
@@ -139,17 +149,15 @@ const SignUp = () => {
                     "Content-type": "application/json",
                 },
             };
-                console.log("api hitted");
-                console.log("otp is ->");
-                console.log(otpe);
-                
+
+
             const { data } = await axios.post(
                 "http://localhost:4000/api/user/verifyotp",
-                { email,otpe},
+                { email, otpe },
                 config
             );
-            console.log(data);
             
+
             toast({
                 title: "OTP VERIFIED SUCCESSFULLY",
                 status: "success",
@@ -174,6 +182,8 @@ const SignUp = () => {
     };
 
     const submitHandler = async () => {
+        
+
         setLoading(true);
         if (!name || !email || !password || !confirmPassword) {
             toast({
@@ -187,6 +197,18 @@ const SignUp = () => {
             return;
         }
 
+        if (!IsVerify) {
+            toast({
+                title: "Email is not verified",
+                description: "You have to verify your gmail first",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            setLoading(false);
+            return;
+        }
         if (password !== confirmPassword) {
             toast({
                 title: "Passwords do not match",
@@ -251,7 +273,7 @@ const SignUp = () => {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <InputRightElement width="5.6rem">
-                        <Button 
+                        <Button
                             colorScheme="blue"
                             h="1.75rem"
                             size="sm"
@@ -273,21 +295,21 @@ const SignUp = () => {
                         value={otpe}
                     />
                     {/* <InputRightElement width="6.3rem"> */}
-                <InputRightElement width = {IsVerify ? "5.6rem" : "6.3rem"}>
-                 {!ShowGetOtp && (
-    <Button 
-    colorScheme="green"
-        marginRight="6px" 
-        h="1.75rem" 
-        size="sm" 
-        onClick={otpSubmitHandle} 
-        isDisabled = {IsVerify}
-        display={ShowVerifyOtp ? 'none' : 'block'}
-    >
-    {IsVerify ? 'VERIFIED' : 'VERIFY OTP'}
-       
-    </Button>
-)}
+                    <InputRightElement width={IsVerify ? "5.6rem" : "6.3rem"}>
+                        {!ShowGetOtp && (
+                            <Button
+                                colorScheme="green"
+                                marginRight="6px"
+                                h="1.75rem"
+                                size="sm"
+                                onClick={otpSubmitHandle}
+                                isDisabled={IsVerify}
+                                display={ShowVerifyOtp ? 'none' : 'block'}
+                            >
+                                {IsVerify ? 'VERIFIED' : 'VERIFY OTP'}
+
+                            </Button>
+                        )}
                     </InputRightElement>
                 </InputGroup>
             </FormControl>
