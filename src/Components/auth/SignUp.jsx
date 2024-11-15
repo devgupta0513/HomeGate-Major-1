@@ -1,27 +1,51 @@
-import React, { useState } from 'react'
-import { Button, Input, InputGroup, InputRightAddon, InputRightElement, FormControl, FormLabel, VStack, useToast } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { Button, Input, InputGroup, InputRightElement, FormControl, FormLabel, VStack, useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [otpe, setOtpe] = useState("")
-    
-    const [ShowGetOtp, setShowGetOtp] = useState(true);
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [otpe, setOtpe] = useState("");
+    const [OtpBackend, setOtpBackend] = useState("");
     const [ShowVerifyOtp, setShowVerifyOtp] = useState(false);
-    const [password, setPassword] = useState()
-    const [confirmPassword, setConfirmPassword] = useState()
-    const [pic, setPic] = useState()
-    const [show, setShow] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [ShowGetOtp, setShowGetOtp] = useState(true);
+    const [IsVerify, setIsVerify] = useState(false);
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const [pic, setPic] = useState();
+    const [show, setShow] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleClick = () => setShow(!show)
-    const toast = useToast()
-    const navigate = useNavigate()
-    const otpHandle  = async() => {
-        // setLoading(true);
-        setShowGetOtp(false)
+    const handleClick = () => setShow(!show);
+    const toast = useToast();
+    const navigate = useNavigate();
+
+    // Use this effect to set a timer after the OTP button is clicked
+    useEffect(() => {
+        let timer;
+        if (!ShowGetOtp) {
+            timer = setTimeout(() => {
+                setShowGetOtp(true); // Enable the "GET OTP" button after 2 minutes
+            }, 120000); // 2 minutes in milliseconds
+        }
+        return () => clearTimeout(timer); // Clear the timer on component unmount
+    }, [ShowGetOtp]);
+
+    const otpHandle = async () => {
+        if (!email ) {
+            toast({
+                title: "Please fill  the email",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            return;
+        }
+        
+        setShowGetOtp(false); // Hide the button immediately after click
         try {
             const config = {
                 headers: {
@@ -29,25 +53,21 @@ const SignUp = () => {
                 },
             };
 
-            const hello = await axios.post(
+            const  {data}  = await axios.post(
                 "http://localhost:4000/api/user/sendotp",
-                { email},
+                {email},
                 config
             );
-            console.log(hello);
+            setOtpBackend(data.otp);
+            console.log(data.otp);
             
-
-                
             toast({
                 title: "OTP SEND SUCCESSFULLY",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "top",
-            })
-            
-            // console.log(otp);
-            
+            });
         } catch (error) {
             toast({
                 title: "Error Occured!",
@@ -59,101 +79,102 @@ const SignUp = () => {
             });
             // setLoading(false);
         }
-
-
-
-    }
-
-
+    };
 
     const otpSubmitHandle  = async() => {
         // setLoading(true);
-        // setShowVerifyOtp(true)
+       
+         
         // setShowGetOtp(true);
-        setOtpe('');
-        try {
-            // const config = {
-            //     headers: {
-            //         "Content-type": "application/json",
-            //     },
-            // };
-
-            // const { otp } = await axios.post(
-            //     "https://linkus-lw9r.onrender.com/api/user/login",
-            //     { email},
-            //     config
-            // );
-                
+        if (!otpe ) {
             toast({
-                title: "OTP VERIFIED  SUCCESSFULLY",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            })
-            
-            // console.log(otp);
-            
-        } catch (error) {
-            toast({
-                title: "Error Occured!",
-                description: error.response.data.message,
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom",
-            });
-            // setLoading(false);
-        }
-
-    }
-
-
-
-    const postDetails = (pics) => {
-        setLoading(true)
-        if (pics === undefined) {
-            toast({
-                title: "Please Select an Image!",
+                title: "Please fill  the otp",
                 status: "warning",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
-            })
-            return
+            });
+            
+            return;
         }
-        if (pics.type === "image/jpeg" || pics.type === "image/png") {
-            const data = new FormData()
-            data.append("file", pics)
-            data.append("upload_preset", "LinkUs")
-            data.append("cloud_name", "minor-linkus")
-            fetch("https://api.cloudinary.com/v1_1/minor-linkus/image/upload", {
-                method: "post",
-                body: data,
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    setPic(data.url.toString())
-                    setLoading(false)
-                })
-                .catch((err) => {
-                    setLoading(false)
-                })
-        } else {
+         if (otpe.search(/[0-9]+/) === -1) {
+           
             toast({
-                title: "Please Select a Valid Image!",
-                status: "",
+                title:"You have entered a characters instead of a valid OTP",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return ;
+          }
+          if (otpe.length !== 6)
+            {
+           
+                toast({
+                    title:"OTP MUST BE OF 6 DIGIT",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom",
+                });
+                return ;
+              }
+        
+        
+        try {
+            if(otpe !== OtpBackend){
+                toast({
+                    title:"OTP IS IN VALID",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom",
+                });
+                return ;
+
+            }
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+                console.log("api hitted");
+                console.log("otp is ->");
+                console.log(otpe);
+                
+            const { data } = await axios.post(
+                "http://localhost:4000/api/user/verifyotp",
+                { email,otpe},
+                config
+            );
+            console.log(data);
+            
+            toast({
+                title: "OTP VERIFIED SUCCESSFULLY",
+                status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "top",
-            })
-            setLoading(false)
-            return
+            });
+            setIsVerify(true)
+            setOtpe('');
+        } catch (error) {
+            console.log("api error");
+            toast({
+                title: "Error Occurred!",
+                description: error.response.data.message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            // setLoading(false);
         }
-    }
+    };
 
     const submitHandler = async () => {
-        setLoading(true)
+        setLoading(true);
         if (!name || !email || !password || !confirmPassword) {
             toast({
                 title: "Please fill all the fields",
@@ -161,10 +182,11 @@ const SignUp = () => {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
-            })
-            setLoading(false)
-            return
+            });
+            setLoading(false);
+            return;
         }
+
         if (password !== confirmPassword) {
             toast({
                 title: "Passwords do not match",
@@ -172,30 +194,31 @@ const SignUp = () => {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
-            })
-            setLoading(false)
-            return
+            });
+            setLoading(false);
+            return;
         }
+
         try {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
                 },
-            }
+            };
             const { data } = await axios.post(
                 "https://linkus-lw9r.onrender.com/api/user",
                 { name, email, password, pic },
                 config
-            )
+            );
             toast({
                 title: "Registration Successful",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
-            })
-            localStorage.setItem("userInfo", JSON.stringify(data))
-            setLoading(false)
+            });
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            setLoading(false);
             navigate('/home');
         } catch (error) {
             toast({
@@ -205,14 +228,13 @@ const SignUp = () => {
                 duration: 5000,
                 isClosable: true,
                 position: "bottom",
-            })
-            setLoading(false)
+            });
+            setLoading(false);
         }
-    }
+    };
 
     return (
-        <VStack spacing="5px" color="black">
-            
+        <VStack spacing="5px" color="black" p={0} m={0} >
             <FormControl id="first-name" isRequired>
                 <FormLabel>Name</FormLabel>
                 <Input
@@ -224,36 +246,34 @@ const SignUp = () => {
             <FormControl id="email1" isRequired>
                 <FormLabel>Email</FormLabel>
                 <InputGroup>
-                <Input
-                    placeholder="Enter your Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    
-                />
-                 <InputRightElement width="5.6rem" >
-                 {ShowGetOtp && (
-    <Button 
-colorScheme="blue"
-        h="1.75rem" 
-        size="sm" 
-        onClick={otpHandle} 
-        
-        display={ShowGetOtp ? 'block' : 'none'}
-    >
-        GET OTP
-    </Button>
-)}
+                    <Input
+                        placeholder="Enter your Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <InputRightElement width="5.6rem">
+                        <Button 
+                            colorScheme="blue"
+                            h="1.75rem"
+                            size="sm"
+                            onClick={otpHandle}
+                            isDisabled={!ShowGetOtp} // Disable button based on ShowGetOtp state
+                        >
+                            GET OTP
+                        </Button>
                     </InputRightElement>
                 </InputGroup>
             </FormControl>
+
             <FormControl id="otp1" isRequired>
                 <FormLabel>OTP</FormLabel>
                 <InputGroup>
-                <Input
-                    placeholder="Enter your otp"
-                    onChange={(e) => setOtpe(e.target.value)}
-                    value={otpe}
-                />
-                 <InputRightElement width="6.3rem">
+                    <Input
+                        placeholder="Enter your otp"
+                        onChange={(e) => setOtpe(e.target.value)}
+                        value={otpe}
+                    />
+                    {/* <InputRightElement width="6.3rem"> */}
+                <InputRightElement width = {IsVerify ? "5.6rem" : "6.3rem"}>
                  {!ShowGetOtp && (
     <Button 
     colorScheme="green"
@@ -261,10 +281,11 @@ colorScheme="blue"
         h="1.75rem" 
         size="sm" 
         onClick={otpSubmitHandle} 
-        
+        isDisabled = {IsVerify}
         display={ShowVerifyOtp ? 'none' : 'block'}
     >
-        VERIFY OTP
+    {IsVerify ? 'VERIFIED' : 'VERIFY OTP'}
+       
     </Button>
 )}
                     </InputRightElement>
@@ -303,8 +324,6 @@ colorScheme="blue"
                 </InputGroup>
             </FormControl>
 
-           
-
             <Button
                 colorScheme="orange"
                 width="100%"
@@ -315,7 +334,7 @@ colorScheme="blue"
                 Sign Up
             </Button>
         </VStack>
-    )
-}
+    );
+};
 
-export default SignUp
+export default SignUp;

@@ -53,14 +53,18 @@ const sendOtp = asyncHandler(async (req, res) => {
 const verifyOtp = asyncHandler(async (req, res) => {
     // Find the most recent OTP for the email
     try {
-    const {  email,otp,} = req.body;
+    const {email,otpe} = req.body;
+	console.log(email);
+	console.log(otpe);
+	
+	
     if (!email  ) {
         return res.status(403).send({
             success: false,
             message: "Please Enter the email",
         });
     }
-    if ( !otp ) {
+    if ( !otpe ) {
         return res.status(403).send({
             success: false,
             message: "Please Enter the otp",
@@ -76,7 +80,7 @@ const verifyOtp = asyncHandler(async (req, res) => {
                 
                 
 			});
-		} else if (otp !== response[0].otp) {
+		} else if (otpe !== response[0].otp) {
 			// Invalid OTP
 			return res.status(400).json({
 				success: false,
