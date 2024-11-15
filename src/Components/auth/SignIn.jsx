@@ -67,7 +67,7 @@ const SignIn = () => {
 
 
     return (
-        <VStack spacing="5px" color='black' >SignUp
+        <VStack spacing="5px" color='black' >
             <FormControl id='email' isRequired >
                 <FormLabel> Email </FormLabel>
                 <Input

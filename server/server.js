@@ -20,6 +20,15 @@ connectDB()
     .catch((err) => {
         console.error(err);
     })
+    app.use(
+        cors({
+          origin: JSON.parse(process.env.CORS_ORIGIN),
+          credentials: true,
+          maxAge: 14400,
+        })
+      );
+    
+    
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -41,14 +50,6 @@ app.use('/api/user',userRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
-
-app.use(
-    cors({
-      origin: JSON.parse(process.env.CORS_ORIGIN),
-      credentials: true,
-      maxAge: 14400,
-    })
-  );
 
 
 

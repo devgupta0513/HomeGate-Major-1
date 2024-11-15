@@ -7,9 +7,10 @@ const SignUp = () => {
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [otpe, setOtpe] = useState("");
-    
-    const [ShowGetOtp, setShowGetOtp] = useState(true);
+    const [OtpBackend, setOtpBackend] = useState("");
     const [ShowVerifyOtp, setShowVerifyOtp] = useState(false);
+    const [ShowGetOtp, setShowGetOtp] = useState(true);
+    const [IsVerify, setIsVerify] = useState(false);
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [pic, setPic] = useState();
@@ -32,6 +33,18 @@ const SignUp = () => {
     }, [ShowGetOtp]);
 
     const otpHandle = async () => {
+        if (!email ) {
+            toast({
+                title: "Please fill  the email",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            return;
+        }
+        
         setShowGetOtp(false); // Hide the button immediately after click
         try {
             const config = {
@@ -40,11 +53,14 @@ const SignUp = () => {
                 },
             };
 
-            const { otp } = await axios.post(
-                "https://linkus-lw9r.onrender.com/api/user/login",
-                { email},
+            const  {data}  = await axios.post(
+                "http://localhost:4000/api/user/sendotp",
+                {email},
                 config
             );
+            setOtpBackend(data.otp);
+            console.log(data.otp);
+            
             toast({
                 title: "OTP SEND SUCCESSFULLY",
                 status: "success",
@@ -67,21 +83,73 @@ const SignUp = () => {
 
     const otpSubmitHandle  = async() => {
         // setLoading(true);
-        // setShowVerifyOtp(true)
+       
+         
         // setShowGetOtp(true);
-        setOtpe('');
+        if (!otpe ) {
+            toast({
+                title: "Please fill  the otp",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            
+            return;
+        }
+         if (otpe.search(/[0-9]+/) === -1) {
+           
+            toast({
+                title:"You have entered a characters instead of a valid OTP",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return ;
+          }
+          if (otpe.length !== 6)
+            {
+           
+                toast({
+                    title:"OTP MUST BE OF 6 DIGIT",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom",
+                });
+                return ;
+              }
+        
+        
         try {
-            // const config = {
-            //     headers: {
-            //         "Content-type": "application/json",
-            //     },
-            // };
+            if(otpe !== OtpBackend){
+                toast({
+                    title:"OTP IS IN VALID",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom",
+                });
+                return ;
 
-            // const { otp } = await axios.post(
-            //     "https://linkus-lw9r.onrender.com/api/user/login",
-            //     { email},
-            //     config
-            // );
+            }
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+                console.log("api hitted");
+                console.log("otp is ->");
+                console.log(otpe);
+                
+            const { data } = await axios.post(
+                "http://localhost:4000/api/user/verifyotp",
+                { email,otpe},
+                config
+            );
+            console.log(data);
+            
             toast({
                 title: "OTP VERIFIED SUCCESSFULLY",
                 status: "success",
@@ -89,7 +157,10 @@ const SignUp = () => {
                 isClosable: true,
                 position: "top",
             });
+            setIsVerify(true)
+            setOtpe('');
         } catch (error) {
+            console.log("api error");
             toast({
                 title: "Error Occurred!",
                 description: error.response.data.message,
@@ -115,6 +186,7 @@ const SignUp = () => {
             setLoading(false);
             return;
         }
+
         if (password !== confirmPassword) {
             toast({
                 title: "Passwords do not match",
@@ -126,6 +198,7 @@ const SignUp = () => {
             setLoading(false);
             return;
         }
+
         try {
             const config = {
                 headers: {
@@ -161,7 +234,7 @@ const SignUp = () => {
     };
 
     return (
-        <VStack spacing="5px" color="black">
+        <VStack spacing="5px" color="black" p={0} m={0} >
             <FormControl id="first-name" isRequired>
                 <FormLabel>Name</FormLabel>
                 <Input
@@ -199,7 +272,8 @@ const SignUp = () => {
                         onChange={(e) => setOtpe(e.target.value)}
                         value={otpe}
                     />
-                    <InputRightElement width="6.3rem">
+                    {/* <InputRightElement width="6.3rem"> */}
+                <InputRightElement width = {IsVerify ? "5.6rem" : "6.3rem"}>
                  {!ShowGetOtp && (
     <Button 
     colorScheme="green"
@@ -207,10 +281,11 @@ const SignUp = () => {
         h="1.75rem" 
         size="sm" 
         onClick={otpSubmitHandle} 
-        
+        isDisabled = {IsVerify}
         display={ShowVerifyOtp ? 'none' : 'block'}
     >
-        VERIFY OTP
+    {IsVerify ? 'VERIFIED' : 'VERIFY OTP'}
+       
     </Button>
 )}
                     </InputRightElement>
