@@ -90,7 +90,7 @@ const PostPetSection = () => {
         throw new Error("Network response was not ok");
       }
 
-      console.log("Form submitted successfully");
+      // console.log("Form submitted successfully");
 
       setEmailError(false);
       setFormError(false);

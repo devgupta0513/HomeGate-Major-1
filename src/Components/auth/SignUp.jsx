@@ -72,7 +72,7 @@ const SignUp = () => {
                 config
             );
             setOtpBackend(data.otp);
-            console.log(data.otp);
+            // console.log(data.otp);
 
             toast({
                 title: "OTP SEND SUCCESSFULLY",
@@ -168,7 +168,7 @@ const SignUp = () => {
             setIsVerify(true)
             setOtpe('');
         } catch (error) {
-            console.log("api error");
+            // console.log("api error");
             toast({
                 title: "Error Occurred!",
                 description: error.response.data.message,

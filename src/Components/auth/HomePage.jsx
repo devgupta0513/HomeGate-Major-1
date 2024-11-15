@@ -10,7 +10,7 @@ const HomePage = () => {
   useEffect(() => {
 
           const user = JSON.parse(localStorage.getItem("userInfo"))
-          console.log(user)
+          // console.log(user)
           if (user) {
               navigate("/home")
           }
