@@ -1,5 +1,5 @@
 {
-  "name": "pet-adopton",
+  "name": "pet-adoption",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "date-fns": "^3.6.0",
     "express-async-handler": "^1.2.0",
     "framer-motion": "^10.16.4",
+    "gh-pages": "^6.2.0",
     "https-browserify": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "loadjs": "^4.3.0-rc1",
@@ -36,13 +37,16 @@
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
+  "homepage": " https://devgupta0513.github.io/Pet-Adoption-Platform-major",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": " cd server && npm run server",
-    "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
+    "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
