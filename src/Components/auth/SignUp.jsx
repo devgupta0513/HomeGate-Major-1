@@ -8,7 +8,8 @@ const SignUp = () => {
     const [email, setEmail] = useState()
     const [otpe, setOtpe] = useState("")
     
-    const [showButton, setShowButton] = useState(true);
+    const [ShowGetOtp, setShowGetOtp] = useState(true);
+    const [ShowVerifyOtp, setShowVerifyOtp] = useState(false);
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [pic, setPic] = useState()
@@ -20,7 +21,7 @@ const SignUp = () => {
     const navigate = useNavigate()
     const otpHandle  = async() => {
         // setLoading(true);
-        setShowButton(false)
+        setShowGetOtp(false)
         try {
             // const config = {
             //     headers: {
@@ -64,7 +65,8 @@ const SignUp = () => {
 
     const otpSubmitHandle  = async() => {
         // setLoading(true);
-        setShowButton(true);
+        // setShowVerifyOtp(true)
+        // setShowGetOtp(true);
         setOtpe('');
         try {
             // const config = {
@@ -225,14 +227,14 @@ const SignUp = () => {
                     
                 />
                  <InputRightElement width="5.6rem" >
-                 {showButton && (
+                 {ShowGetOtp && (
     <Button 
 colorScheme="blue"
         h="1.75rem" 
         size="sm" 
         onClick={otpHandle} 
         
-        display={showButton ? 'block' : 'none'}
+        display={ShowGetOtp ? 'block' : 'none'}
     >
         GET OTP
     </Button>
@@ -249,7 +251,7 @@ colorScheme="blue"
                     value={otpe}
                 />
                  <InputRightElement width="6.3rem">
-                 {!showButton && (
+                 {!ShowGetOtp && (
     <Button 
     colorScheme="green"
         marginRight="6px" 
@@ -257,7 +259,7 @@ colorScheme="blue"
         size="sm" 
         onClick={otpSubmitHandle} 
         
-        display={showButton ? 'none' : 'block'}
+        display={ShowVerifyOtp ? 'none' : 'block'}
     >
         VERIFY OTP
     </Button>
