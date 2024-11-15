@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Pet-Adoption-Platform-major/static/css/main.34fbf80f.css",
-    "main.js": "/Pet-Adoption-Platform-major/static/js/main.2392de95.js",
+    "main.js": "/Pet-Adoption-Platform-major/static/js/main.a20e0880.js",
     "static/media/developer-png.png": "/Pet-Adoption-Platform-major/static/media/developer-png.d420d289f8c643d9857f.png",
     "static/media/postPet.png": "/Pet-Adoption-Platform-major/static/media/postPet.37270a435414519a0370.png",
     "static/media/girlHoldingADog.png": "/Pet-Adoption-Platform-major/static/media/girlHoldingADog.81cb11ec5b386f9189ad.png",
@@ -13,10 +13,10 @@
     "static/media/footPrint.png": "/Pet-Adoption-Platform-major/static/media/footPrint.212b16d10fb566ed6047.png",
     "index.html": "/Pet-Adoption-Platform-major/index.html",
     "main.34fbf80f.css.map": "/Pet-Adoption-Platform-major/static/css/main.34fbf80f.css.map",
-    "main.2392de95.js.map": "/Pet-Adoption-Platform-major/static/js/main.2392de95.js.map"
+    "main.a20e0880.js.map": "/Pet-Adoption-Platform-major/static/js/main.a20e0880.js.map"
   },
   "entrypoints": [
     "static/css/main.34fbf80f.css",
-    "static/js/main.2392de95.js"
+    "static/js/main.a20e0880.js"
   ]
 }
