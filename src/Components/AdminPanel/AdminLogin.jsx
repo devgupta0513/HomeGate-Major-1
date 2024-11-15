@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AdminPanel from "./AdminPanel";
 
 const AdminLogin = () => {
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -11,7 +12,7 @@ const AdminLogin = () => {
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
-        const response = await fetch('http://localhost:4000/admin/credentials');
+        const response = await fetch(`${endpoint}/admin/credentials`);
         if (!response.ok) {
           throw new Error('Failed to fetch');
         }

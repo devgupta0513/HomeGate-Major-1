@@ -16,7 +16,7 @@ const PostPetSection = () => {
   const [picture, setPicture] = useState(null);
   const [fileName, setFileName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false); 
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   useEffect(() => {
     if (!isSubmitting) {
       setEmailError(false);
@@ -81,7 +81,7 @@ const PostPetSection = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/services", {
+      const response = await fetch(`${endpoint}/services`, {
         method: "POST",
         body: formData,
       });

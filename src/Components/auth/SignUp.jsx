@@ -16,7 +16,7 @@ const SignUp = () => {
     const [pic, setPic] = useState();
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const endpoint = process.env.REACT_APP_BASE_URL;
     const handleClick = () => setShow(!show);
     const toast = useToast();
     const navigate = useNavigate();
@@ -67,7 +67,7 @@ const SignUp = () => {
             };
 
             const { data } = await axios.post(
-                "http://localhost:4000/api/user/sendotp",
+                `${endpoint}/api/user/sendotp`,
                 { email },
                 config
             );
@@ -152,7 +152,7 @@ const SignUp = () => {
 
 
             const { data } = await axios.post(
-                "http://localhost:4000/api/user/verifyotp",
+                `${endpoint}/api/user/verifyotp`,
                 { email, otpe },
                 config
             );
@@ -228,7 +228,7 @@ const SignUp = () => {
                 },
             };
             const { data } = await axios.post(
-                "https://linkus-lw9r.onrender.com/api/user",
+                `${endpoint}/api/user`,
                 { name, email, password, pic },
                 config
             );

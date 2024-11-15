@@ -8,10 +8,10 @@ const AdoptingRequests = () => {
   const [petDetailsPopup, setPetDetailsPopup] = useState(false); 
   const [selectedPet, setSelectedPet] = useState(null); 
   const [selectedPetId, setSelectedPetId] = useState(''); 
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const fetchForms = async () => {
     try {
-      const response = await fetch('http://localhost:4000/form/getForms');
+      const response = await fetch(`${endpoint}/form/getForms`);
       if (!response.ok) {
         throw new Error('An error occurred');
       }
@@ -26,7 +26,7 @@ const AdoptingRequests = () => {
 
   const fetchPets = async () => {
     try {
-      const response = await fetch('http://localhost:4000/approvedPets');
+      const response = await fetch(`${endpoint}/approvedPets`);
       if (!response.ok) {
         throw new Error('An error occurred');
       }
@@ -112,7 +112,7 @@ const AdoptingRequests = () => {
           <div className='popup-content'>
             <div className='pet-view-card'>
               <div className='pet-card-pic'>
-                <img src={`http://localhost:4000/images/${selectedPet.filename}`} alt={selectedPet.name} />
+                <img src={`${endpoint}/images/${selectedPet.filename}`} alt={selectedPet.name} />
               </div>
               <div className='pet-card-details'>
                 <h2>{selectedPet.name}</h2>

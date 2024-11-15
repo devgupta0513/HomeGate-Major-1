@@ -6,7 +6,7 @@ const AdoptedCards = (props) => {
   const [showApproved, setShowApproved] = useState(false);
   const [showDeletedSuccess, setshowDeletedSuccess] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const formatTimeAgo = (updatedAt) => {
     const date = new Date(updatedAt);
     return formatDistanceToNow(date, { addSuffix: true });
@@ -15,7 +15,7 @@ const AdoptedCards = (props) => {
  const handleReject = async () => {
     setIsDeleting(true)
     try {
-      const response = await fetch(`http://localhost:4000/delete/${props.pet._id}`, {
+      const response = await fetch(`${endpoint}/delete/${props.pet._id}`, {
         method: 'DELETE'
       })
 
@@ -37,7 +37,7 @@ const AdoptedCards = (props) => {
     <div className='req-containter'>
       <div className='pet-view-card'>
         <div className='pet-card-pic'>
-          <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
+          <img src={`${endpoint}/images/${props.pet.filename}`} alt={props.pet.name} />
         </div>
         <div className='pet-card-details'>
           <h2>{props.pet.name}</h2>

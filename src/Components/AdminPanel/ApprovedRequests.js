@@ -4,10 +4,10 @@ import PetCards from './PetCards'
 const ApprovedRequests = () => {
   const [requests, setRequests] = useState([])
   const [loading, setLoading] = useState(true)
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const fetchRequests = async () => {
     try {
-      const response = await fetch('http://localhost:4000/approvedPets')
+      const response = await fetch(`${endpoint}/approvedPets`)
       if (!response.ok) {
         throw new Error('An error occurred')
       }

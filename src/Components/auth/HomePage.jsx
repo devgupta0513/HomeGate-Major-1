@@ -39,7 +39,7 @@ const HomePage = () => {
         >
         
           <Text fontSize="5xl" fontFamily="Work sans" >
-            HomeGate    
+          {process.env.REACT_APP_TILE}         
             
           </Text>
           

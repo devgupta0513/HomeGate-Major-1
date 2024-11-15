@@ -4,7 +4,7 @@ import { formatDistanceToNow } from 'date-fns';
 
 const PetsViewer = (props) => {
   const [showPopup, setShowPopup] = useState(false);
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
@@ -17,7 +17,7 @@ const PetsViewer = (props) => {
   return (
     <div className='pet-view-card'>
       <div className='pet-card-pic'>
-        <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
+        <img src={`${endpoint}/images/${props.pet.filename}`} alt={props.pet.name} />
       </div>
       <div className='pet-card-details'>
         <h2>{props.pet.name}</h2>

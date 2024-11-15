@@ -11,7 +11,7 @@ function AdoptForm(props) {
   const [ErrPopup, setErrPopup] = useState(false);
   const [SuccPopup, setSuccPopup] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const endpoint = process.env.REACT_APP_BASE_URL;
   const isEmailValid = (email) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
     return emailPattern.test(email);
@@ -41,7 +41,7 @@ function AdoptForm(props) {
 
       setIsSubmitting(true)
 
-      const response = await fetch('http://localhost:4000/form/save', {
+      const response = await fetch(`${endpoint}/form/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ function AdoptForm(props) {
       <div className="form-pet-container">
         <div className="pet-details">
           <div className="pet-pic">
-            <img src={`http://localhost:4000/images/${props.pet.filename}`} alt={props.pet.name} />
+            <img src={`${endpoint}/images/${props.pet.filename}`} alt={props.pet.name} />
           </div>
           <div className="pet-info">
             <h2>{props.pet.name}</h2>
