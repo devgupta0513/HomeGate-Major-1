@@ -70,7 +70,7 @@ const otpTemplate = (otp) => {
 	<body>
 		<div class="container">
 			<a href=""><img class="logo"
-					src="http://res.cloudinary.com/minor-linkus/image/upload/v1731516552/try/deeoeguluc0ecizzubzf.png" alt="MentorMatch Logo"></a>
+					src="http://res.cloudinary.com/minor-linkus/image/upload/v1731516552/try/deeoeguluc0ecizzubzf.png" alt="HomeGate Logo"></a>
 			<div class="message">OTP Verification Email</div>
 			<div class="body">
 				<p>Dear User,</p>
@@ -81,7 +81,7 @@ const otpTemplate = (otp) => {
 				Once your account is verified, you will have access to our platform and its features.</p>
 			</div>
 			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-					href="mailto:info@MentorMatch.com">info@HomeGate.com</a>. We are here to help!</div>
+					href="mailto:homegate.info@gmail.com">homegate.info@gmail.com</a>. We are here to help!</div>
 		</div>
 	</body>
 	
