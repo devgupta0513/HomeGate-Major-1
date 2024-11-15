@@ -3,14 +3,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const petRouter = require('./Routes/PetRoute')
 const AdoptFormRoute = require('./Routes/AdoptFormRoute')
-const AdminRoute = require('./Routes/AdminRoute')
+const userRoutes = require('./Routes/userRoutes');
+const AdminRoute = require('./Routes/AdminRoute');
+const { notFound, errorHandler } = require("./middlewares/errrorMIddleware");
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./db');
 
 const app = express();
 
-app.use(cors());
+connectDB()
+    .then(() => {
+        console.log('Connected to DB');
+       
+    })
+    .catch((err) => {
+        console.error(err);
+    })
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -18,19 +27,35 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/',(req,res)=>{
+    res.status(200).json({
+        "name" :"BACKEND OF HOMEGATE"
+    })
+})
 app.use(petRouter)
 app.use('/form', AdoptFormRoute)
 app.use('/admin', AdminRoute)
+app.use('/api/user',userRoutes)
 
 
-connectDB()
-    .then(() => {
-        console.log('Connected to DB');
-        const PORT = 4000;
-        app.listen(PORT, () => {
-            console.log(`Listening on port ${PORT}`)
-        })
+
+app.use(notFound)
+app.use(errorHandler)
+
+app.use(
+    cors({
+      origin: JSON.parse(process.env.CORS_ORIGIN),
+      credentials: true,
+      maxAge: 14400,
     })
-    .catch((err) => {
-        console.error(err);
+  );
+
+
+
+
+const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`)
     })
+
+    
