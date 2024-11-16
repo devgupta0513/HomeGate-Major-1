@@ -903,9 +903,11 @@ body {
 
 .post-pet-section h3 {
     font-family: "Varela Round", sans-serif;
+    padding-bottom: 10px;
     color: var(--orange);
-    font-size: 20px;
-    margin-top: 20px;
+    border-bottom: 2px solid var(--orange);
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 .post-pet-section label {
@@ -944,7 +946,24 @@ body {
     padding: 20px 25px;
 }
 
-.filter-selection-service select {
+/* .filter-selection-service select {
+    font-family: "Varela Round", sans-serif;
+    font-size: 14px;
+    margin: 10px 0;
+    border-radius: 100px;
+    border: none;
+    padding: 8px 8px;
+    color: var(--white);
+    background-color: var(--orange);
+} */
+
+.input-box select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 7px 0;
     font-family: "Varela Round", sans-serif;
     font-size: 14px;
     margin: 10px 0;
@@ -954,7 +973,6 @@ body {
     color: var(--white);
     background-color: var(--orange);
 }
-
 .cta-button {
     display: inline-block;
     padding: 10px 16px;
@@ -985,7 +1003,7 @@ body {
     margin: 10px 0;
     border-radius: 100px;
     border: none;
-    padding: 8px 20px;
+    padding: 8px 8px;
     color: var(--white);
     background-color: var(--orange);
     cursor: pointer;
@@ -1007,6 +1025,7 @@ body {
     display: inline-block;
     color: var(--white);
     margin-right: 10px;
+    
 }
 
 

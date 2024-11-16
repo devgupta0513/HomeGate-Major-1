@@ -159,7 +159,8 @@ const PostPetSection = () => {
           />
         </div>
 
-        <div className="filter-selection-service">
+        {/* <div className="filter-selection-service"> */}
+        <div className="input-box">
           <label>Type:</label>
           <select
             value={type}
@@ -175,14 +176,7 @@ const PostPetSection = () => {
           </select>
         </div>
 
-        <div className="input-box">
-          <h3>Justification for giving a pet</h3>
-          <textarea
-            rows="4"
-            value={justification}
-            onChange={(e) => setJustification(e.target.value)}
-          ></textarea>
-        </div>
+        
 
         <h3>Contact Information</h3>
 
@@ -202,6 +196,29 @@ const PostPetSection = () => {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+        </div>
+        <div className="input-box">
+          <label>Description:</label>
+          <textarea
+            rows="4"
+            value={justification}
+            onChange={(e) => setJustification(e.target.value)}
+            placeholder="Care Requirements , Adoption Requirements , Diet Plan , Special Needs , Follow up Conditions etc..... "
+          ></textarea>
+        </div>
+        <div className="input-box">
+          <label>Medical Report:</label>
+          <label className="file-input-label">
+            <span className="file-input-text">
+              {fileName || "Upload  Report"}
+            </span>
+            <input
+              className="file-input"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </label>
         </div>
 
         {emailError && (
