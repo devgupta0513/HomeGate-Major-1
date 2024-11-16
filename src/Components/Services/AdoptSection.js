@@ -18,11 +18,14 @@ const AdoptSection = () => {
       </p>
 
       <h3>Benefits of Pet Adoption</h3>
-      <ul>
+      <div className="ul-div"><ul>
+      
         <li>Provide a loving home to a pet in need</li>
         <li>Experience the unconditional love of a pet</li>
         <li>Create lasting memories and cherished moments</li>
+        
       </ul>
+      </div>
 
       <h3>Adoption Process</h3>
       <ol>

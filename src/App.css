@@ -198,21 +198,34 @@
 }
 
 .adopt-section img {
-    margin: 15px 0;
+    /* margin: 15px 0;
     max-width: 60%;
     border-radius: 10px;
-    margin-bottom: 20px;
-}
+    margin-bottom: 20px; */
+    width: 100%; /* Make the image responsive */
+    max-width: 400px; /* Limit the image size */
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    border-radius: 10px; /* Add rounded corners */
+  }
+
 
 .adopt-section ul {
     font-family: "Varela Round", sans-serif;
+    text-align: left; /* Align text for better readability */
+  margin: 20px auto;
+  padding-left: 40px;
 }
 
 .adopt-section ol {
     font-family: "Varela Round", sans-serif;
     color: var(--darkGrey);
     list-style: none;
-    padding-left: 20px;
+    /* padding-left: 20px; */
+    text-align: left; /* Align text for better readability */
+  margin: 20px auto;
+  padding-left: 40px;
 }
 
 .post-pet-section {
@@ -685,8 +698,12 @@ body {
 
 
 .adopt-section {
-    text-align: center;
-    padding: 50px;
+    /* text-align: center;
+    padding: 50px; */
+    max-width: 800px;
+  margin: 0 auto; /* Center the section horizontally */
+  padding: 20px;
+  text-align: center;
 }
 
 .adopt-section h2 {
@@ -694,44 +711,151 @@ body {
     padding-bottom: 10px;
     color: var(--orange);
     border-bottom: 2px solid var(--orange);
-    font-size: 32px;
-    margin-bottom: 20px;
+    /* font-size: 32px;
+    margin-bottom: 20px; */
+    font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 .adopt-section img {
-    margin: 15px 0;
+    /* margin: 15px 0;
     max-width: 60%;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; */
+    width: 100%; /* Make the image responsive */
+  max-width: 400px; /* Limit the image size */
+  height: auto;
+  margin: 20px auto;
+  display: block;
+  border-radius: 10px; /* Add rounded corners */
 }
 
 .adopt-section p {
     font-family: "Varela Round", sans-serif;
     color: var(--darkGrey);
-    font-size: 16px;
+    /* font-size: 16px; */
+    /* margin-bottom: 20px; */
+    font-size: 1rem;
+    line-height: 1.6;
     margin-bottom: 20px;
+    
 }
 
 .adopt-section h3 {
     color: var(--orange);
-    font-size: 20px;
-    margin-top: 20px;
+    /* font-size: 20px; */
+    font-size: 1.5rem;
+    /* margin-top: 20px; */
+    margin: 20px 0 10px;
 }
 
 .adopt-section ul {
     font-family: "Varela Round", sans-serif;
     color: var(--darkGrey);
+    text-align: left; /* Align text for better readability */
     list-style: none;
-    padding-left: 20px;
+    /* padding-left: 20px; */
+    margin: 20px auto;
+  padding-left: 40px;
 }
 
 .adopt-section ol {
     font-family: "Varela Round", sans-serif;
     color: var(--darkGrey);
     list-style: none;
-    padding-left: 20px;
+    /* padding-left: 20px; */
+    /* text-align: left; Align text for better readability */
+  margin: 20px auto;
+  padding-left: 40px;
 }
+.adopt-section ul li,
+.adopt-section ol li {
+    text-align: center; 
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+/* .ul-div
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
 
+} */
+.adopt-section .cta-button {
+    background-color: #007BFF; /* Primary blue color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .adopt-section .cta-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .adopt-section {
+      padding: 15px;
+    }
+  
+    .adopt-section h2 {
+      font-size: 1.8rem;
+    }
+  
+    .adopt-section h3 {
+      font-size: 1.3rem;
+    }
+  
+    .adopt-section p,
+    .adopt-section ul li,
+    .adopt-section ol li {
+      font-size: 0.95rem;
+    }
+  
+    .adopt-section img {
+      max-width: 300px;
+    }
+  
+    .adopt-section .cta-button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .adopt-section {
+      padding: 10px;
+    }
+  
+    .adopt-section h2 {
+      font-size: 1.5rem;
+    }
+  
+    .adopt-section h3 {
+      font-size: 1.2rem;
+    }
+  
+    .adopt-section img {
+      max-width: 250px;
+    }
+  
+    .adopt-section p,
+    .adopt-section ul li,
+    .adopt-section ol li {
+      font-size: 0.9rem;
+    }
+  
+    .adopt-section .cta-button {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+  }
 .cta-button {
     display: inline-block;
     padding: 10px 16px;
