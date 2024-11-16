@@ -6,7 +6,7 @@ const SignIn = () => {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-
+    const endpoint = process.env.REACT_APP_BASE_URL;
     const [Show, setShow] = useState(false)
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     const handleCLick = () => setShow(!Show)
@@ -57,7 +57,7 @@ const SignIn = () => {
             };
 
             const { data } = await axios.post(
-                "http://localhost:4000/api/user/login",
+                `${endpoint}/api/user/login`,
                 { email, password },
                 config
             );  
