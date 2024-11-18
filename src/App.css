@@ -875,8 +875,14 @@ body {
 }
 
 .post-pet-section {
-    text-align: center;
-    padding: 50px;
+    /* text-align: center;
+    padding: 25px; */
+    max-width: 800px;
+  margin: 0 auto; /* Center the section horizontally */
+  /* padding: 20px; */
+  padding-right: 40px;
+  padding-top: 20px;
+  text-align: center;
 }
 
 .post-pet-section h2 {
@@ -971,6 +977,7 @@ body {
     border: none;
     padding: 8px 8px;
     color: var(--white);
+    text-align: center;
     background-color: var(--orange);
 }
 .cta-button {
@@ -1011,6 +1018,24 @@ body {
     max-width: 165px;
     overflow: hidden;
     max-height: 33px;
+    
+}
+.post-report-pictue
+{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 7px 0;
+    font-family: "Varela Round", sans-serif;
+    font-size: 14px;
+    margin: 10px 0;
+    border-radius: 100px;
+    border: none;
+    padding: 8px 8px;
+    color: var(--white);
+    background-color: var(--orange);
 }
 
 .file-input-label:hover {

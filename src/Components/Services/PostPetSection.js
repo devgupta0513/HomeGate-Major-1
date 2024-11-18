@@ -137,7 +137,7 @@ const PostPetSection = () => {
 
         <div className="input-box">
           <label>Picture:</label>
-          <label className="file-input-label">
+          <label className="post-report-pictue">
             <span className="file-input-text">
               {fileName || "Choose a Picture"}
             </span>
@@ -161,7 +161,8 @@ const PostPetSection = () => {
 
         {/* <div className="filter-selection-service"> */}
         <div className="input-box">
-          <label>Type:</label>
+          <label >Type:</label>
+          
           <select
             value={type}
             onChange={(event) => setType(event.target.value)}
@@ -174,6 +175,7 @@ const PostPetSection = () => {
             <option value="Fish">Fish</option>
             <option value="Other">Other</option>
           </select>
+          
         </div>
 
         
@@ -208,7 +210,7 @@ const PostPetSection = () => {
         </div>
         <div className="input-box">
           <label>Medical Report:</label>
-          <label className="file-input-label">
+          <label className="post-report-pictue">
             <span className="file-input-text">
               {fileName || "Upload  Report"}
             </span>
