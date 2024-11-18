@@ -230,7 +230,7 @@ const PostPetSection = () => {
           <p className="error-message">Please fill out all fields correctly.</p>
         )}
 
-        <button type="submit" className="cta-button" disabled={isSubmitting}>
+        <button type="submit" className="cta-button-pps" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit Your Pet"}
         </button>
 

@@ -234,13 +234,22 @@
 }
 
 .post-pet-section img {
-    max-width: 60%;
+    /* max-width: 60%;*/
+    max-width: 60%;;
     border-radius: 10px;
     margin-bottom: 20px;
     font-family: "Varela Round", sans-serif;
     color: var(--orange);
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 20px; 
+
+     /*width: 100%; Make the image responsive */
+  /* max-width: 400px; Limit the image size */
+   /* height: auto;  */
+  margin: 20px auto;
+  /* display: block; */
+  /* border-radius: 10px;  */
+    
 }
 
 .post-pet-section label {
@@ -894,11 +903,7 @@ body {
     margin-bottom: 20px;
 }
 
-.post-pet-section img {
-    max-width: 60%;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
+
 
 .post-pet-section p {
     font-family: "Varela Round", sans-serif;
@@ -980,9 +985,9 @@ body {
     text-align: center;
     background-color: var(--orange);
 }
-.cta-button {
+.cta-button-pps {
     display: inline-block;
-    padding: 10px 16px;
+    padding: 15px 40px;
     background-color: var(--orange);
     color: var(--white);
     text-decoration: none;
@@ -991,10 +996,12 @@ body {
     transition: background-color 0.3s;
     border: none;
     margin-top: 10px;
+    margin-left:100px;
+    
 }
 
-.cta-button:hover {
-    background-color: var(--hoverorange);
+.cta-button-pps:hover {
+    background-color: rgb(194, 116, 39);
     cursor: pointer;
     transition: all 0.5s;
 }
@@ -1037,7 +1044,12 @@ body {
     color: var(--white);
     background-color: var(--orange);
 }
-
+.post-report-pictue :hover
+{
+    cursor: pointer;
+    transition: all 0.5s;
+    
+}
 .file-input-label:hover {
     background-color: var(--hoverorange);
 }
