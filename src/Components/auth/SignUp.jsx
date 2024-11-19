@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Input, InputGroup, InputRightElement, FormControl, FormLabel, VStack, useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 const SignUp = () => {
     const [name, setName] = useState();
@@ -239,8 +240,17 @@ const SignUp = () => {
                 isClosable: true,
                 position: "bottom",
             });
-            localStorage.setItem("userInfo", JSON.stringify(data));
-            setLoading(false);
+            // localStorage.setItem("userInfo", JSON.stringify(data));
+            // setLoading(false);
+            // navigate('/home');
+            Cookies.set("homegate-token", JSON.stringify(data), {
+                expires: 1, // 1 day expiry
+                secure: true, // HTTPS only
+                sameSite: "Strict", // Protect against CSRF
+                // sameSite: "Lax", // Cross-origin compatibility
+                path: "/"
+            });
+             setLoading(false);
             navigate('/home');
         } catch (error) {
             toast({

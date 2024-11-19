@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightAddon, InputRightElement, Show, VStack, useToast } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import Cookies from "js-cookie";
+
 const SignIn = () => {
 
     const [email, setEmail] = useState()
@@ -58,7 +60,7 @@ const SignIn = () => {
 
             const { data } = await axios.post(
                 `${endpoint}/api/user/login`,
-                { email, password },
+                { email, password },    
                 config
             );  
                 
@@ -70,7 +72,17 @@ const SignIn = () => {
                 position: "bottom",
             });
             
-            localStorage.setItem("userInfo", JSON.stringify(data));
+            // localStorage.setItem("userInfo", JSON.stringify(data));
+            // setLoading(false);
+            // navigate('/home');
+            Cookies.set("homegate-token", JSON.stringify(data), {
+                expires: 1, // 1 day expiry
+                // expires: 10/(24*60*60), // 10 seconds = 10/(24*60*60) days
+                secure: true, // HTTPS only
+                sameSite: "Strict", // Protect against CSRF hosted
+                // sameSite: "Lax", // Cross-origin compatibility local
+                 path: "/"
+            });
             setLoading(false);
             navigate('/home');
         } catch (error) {
