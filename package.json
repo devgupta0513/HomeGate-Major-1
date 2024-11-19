@@ -39,7 +39,7 @@
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
-  "homepage": " https://devgupta0513.github.io/Pet-Adoption-Platform-major",
+  "homepage": " https://devgupta0513.github.io/HomeGate-Major-1",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
