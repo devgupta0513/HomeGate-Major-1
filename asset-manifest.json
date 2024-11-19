@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Pet-Adoption-Platform-major/static/css/main.85ebedca.css",
-    "main.js": "/Pet-Adoption-Platform-major/static/js/main.acd2e13c.js",
-    "static/media/developer-png.png": "/Pet-Adoption-Platform-major/static/media/developer-png.d420d289f8c643d9857f.png",
-    "static/media/postPet.png": "/Pet-Adoption-Platform-major/static/media/postPet.37270a435414519a0370.png",
-    "static/media/girlHoldingADog.png": "/Pet-Adoption-Platform-major/static/media/girlHoldingADog.81cb11ec5b386f9189ad.png",
-    "static/media/homepageDog.png": "/Pet-Adoption-Platform-major/static/media/homepageDog.3db4a4c8121477797150.png",
-    "static/media/adoptPet.png": "/Pet-Adoption-Platform-major/static/media/adoptPet.b07997b342927ad1ca0b.png",
-    "static/media/HomeDarkCardLeftPic.png": "/Pet-Adoption-Platform-major/static/media/HomeDarkCardLeftPic.9738ca591ed19a4030f3.png",
-    "static/media/HomeDarkCardRightPic.png": "/Pet-Adoption-Platform-major/static/media/HomeDarkCardRightPic.e156fbfb2024fde24666.png",
-    "static/media/logo.png": "/Pet-Adoption-Platform-major/static/media/logo.05d6ae81a0721ba2d851.png",
-    "static/media/footPrint.png": "/Pet-Adoption-Platform-major/static/media/footPrint.212b16d10fb566ed6047.png",
-    "index.html": "/Pet-Adoption-Platform-major/index.html",
-    "main.85ebedca.css.map": "/Pet-Adoption-Platform-major/static/css/main.85ebedca.css.map",
-    "main.acd2e13c.js.map": "/Pet-Adoption-Platform-major/static/js/main.acd2e13c.js.map"
+    "main.css": "/HomeGate-Major-1/static/css/main.85ebedca.css",
+    "main.js": "/HomeGate-Major-1/static/js/main.26d62af3.js",
+    "static/media/developer-png.png": "/HomeGate-Major-1/static/media/developer-png.d420d289f8c643d9857f.png",
+    "static/media/postPet.png": "/HomeGate-Major-1/static/media/postPet.37270a435414519a0370.png",
+    "static/media/girlHoldingADog.png": "/HomeGate-Major-1/static/media/girlHoldingADog.81cb11ec5b386f9189ad.png",
+    "static/media/homepageDog.png": "/HomeGate-Major-1/static/media/homepageDog.3db4a4c8121477797150.png",
+    "static/media/adoptPet.png": "/HomeGate-Major-1/static/media/adoptPet.b07997b342927ad1ca0b.png",
+    "static/media/HomeDarkCardLeftPic.png": "/HomeGate-Major-1/static/media/HomeDarkCardLeftPic.9738ca591ed19a4030f3.png",
+    "static/media/HomeDarkCardRightPic.png": "/HomeGate-Major-1/static/media/HomeDarkCardRightPic.e156fbfb2024fde24666.png",
+    "static/media/logo.png": "/HomeGate-Major-1/static/media/logo.05d6ae81a0721ba2d851.png",
+    "static/media/footPrint.png": "/HomeGate-Major-1/static/media/footPrint.212b16d10fb566ed6047.png",
+    "index.html": "/HomeGate-Major-1/index.html",
+    "main.85ebedca.css.map": "/HomeGate-Major-1/static/css/main.85ebedca.css.map",
+    "main.26d62af3.js.map": "/HomeGate-Major-1/static/js/main.26d62af3.js.map"
   },
   "entrypoints": [
     "static/css/main.85ebedca.css",
-    "static/js/main.acd2e13c.js"
+    "static/js/main.26d62af3.js"
   ]
 }
