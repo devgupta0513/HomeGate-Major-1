@@ -156,15 +156,15 @@ const SignIn = () => {
                 colorScheme='red'
                 width="100%"
                 onClick={() => {
-                    // setEmail("guest@example.com")
-                    // setPassword("12345678")
-                    toast({
-                        title: "CREATE YOUR OWN ID ",
-                        status: "error",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    });
+                    setEmail("guest@example.com")
+                    setPassword("12345678")
+                    // toast({
+                    //     title: "CREATE YOUR OWN ID ",
+                    //     status: "error",
+                    //     duration: 5000,
+                    //     isClosable: true,
+                    //     position: "top",
+                    // });
                 }}
             >
 
