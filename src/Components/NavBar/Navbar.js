@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "./images/logo.png";
+import Cookies from "js-cookie";
+
 import { Await, useNavigate } from 'react-router-dom';
 const Navbar = (props) => {
   const navigate = useNavigate()
   const logoutHandler = () => {
-    localStorage.removeItem("userInfo");
+    // localStorage.removeItem("userInfo");
+    Cookies.remove("homegate-token", { path: "/" });
     navigate("/")
 }
   return (
